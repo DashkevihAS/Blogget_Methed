@@ -1,6 +1,5 @@
 {
-  "plugins": ["react-html-svg-invalid"],
-  "env": {
+    "env": {
     "browser": true,
     "es6": true,
     "node": true
@@ -15,7 +14,6 @@
     "sourceType": "module"
   },
   "rules": {
-    "react-html-svg-invalid/html-svg-invalid": 2,
     "react/react-in-jsx-scope": "off",
     "no-console": "off",
     "no-loop-func": ["error"],
@@ -141,7 +139,7 @@
     "max-len": [
       "error",
       {
-        "code": 820,
+        "code": 80,
         "tabWidth": 2,
         "ignoreUrls": true,
         "ignorePattern": "goog.(module|require)"
