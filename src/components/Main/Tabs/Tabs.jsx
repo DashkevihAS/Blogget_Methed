@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useState, useEffect} from 'react';
 import {assignId} from '../../../utils/generateRandomId';
 import {debounceRaf} from '../../../utils/debounce.js';
-// import {Text} from '../../../UI/Text';
+import {Text} from '../../../UI/Text';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
 import {ReactComponent as HomeIcon} from './img/home.svg';
@@ -47,7 +47,7 @@ export const Tabs = () => {
           <button
             className={style.btn}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-            {tabValue}
+            <Text size={18} tsize={22} bold>{tabValue}</Text>
             <ArrowIcon width={15} height={15} />
           </button>
         </div>
@@ -60,7 +60,7 @@ export const Tabs = () => {
               <button
                 className={style.btn}
                 onClick={() => setTabValue(value)}>
-                {value}
+                <Text size={18} tsize={22} bold>{value}</Text>
                 {Icon && <Icon width={30} height={30}/>}
               </button>
             </li>
