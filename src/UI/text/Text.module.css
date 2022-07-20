@@ -1,6 +1,13 @@
 .center {
   text-align: center;
 }
+.bold {
+  font-weight: 700;
+}
+
+.medium {
+  font-weight: 500;
+}
 
 .black {
   color: var(--black);
@@ -175,5 +182,5 @@
   .fsd12 {
     font-size: 12px;
     line-height: 16px;
-  } 
+  }
 }

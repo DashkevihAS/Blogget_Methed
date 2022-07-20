@@ -10,7 +10,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     display: -webkit-box;
-    font-weight: 700;
+    /* font-weight: 700; */
     margin-bottom: 10px;
     transition: color 0.36s ease-in-out;
 }
