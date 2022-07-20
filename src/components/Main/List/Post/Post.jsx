@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Date from './Date';
 import Rating from './Rating';
 import BtnDelete from './BtnDelete';
+import Thumbnail from './Thumbnail';
+import Content from './Content';
 
 
 export const Post = ({postData}) => {
@@ -11,16 +13,9 @@ export const Post = ({postData}) => {
   console.log(title, author, ups, date);
   return (
     <li className={style.post}>
-      <img className={style.img} src={notphoto} alt="{title}" />
+      <Thumbnail src={notphoto} alt={title}/>
 
-      <div className={style.content} >
-        <h2 className={style.title}>
-          <a className={style.linkPost} href="#post">
-            {title}
-          </a>
-        </h2>
-        <a className={style.linkAuthor} href="#author">{author}</a>
-      </div>
+      <Content author={author} title={title} />
 
       <Rating ups={ups}/>
 

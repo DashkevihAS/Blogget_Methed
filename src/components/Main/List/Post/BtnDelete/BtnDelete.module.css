@@ -28,7 +28,7 @@
     color: var(--orange);
 }
 
-.delete svg {
+.deleteSvg {
     width: 100%;
     height: 100%;
 }
