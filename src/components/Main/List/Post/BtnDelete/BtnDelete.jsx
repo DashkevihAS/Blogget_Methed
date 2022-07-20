@@ -7,4 +7,3 @@ export const BtnDelete = () => (
     <DeleteIcon className={style.deleteSvg}/>
   </button>
 );
-

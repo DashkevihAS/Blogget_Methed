@@ -71,6 +71,7 @@ export const Tabs = () => {
   );
 };
 
+
 Tabs.propTypes = {
   list: PropTypes.array,
   setList: PropTypes.func

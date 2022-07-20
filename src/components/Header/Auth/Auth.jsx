@@ -11,5 +11,4 @@ export const Auth = ({auth}) =>
     </button>
   );
 
-
 Auth.propTypes = {auth: PropTypes.bool};
