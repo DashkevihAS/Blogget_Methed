@@ -33,7 +33,7 @@ export const Auth = () => {
           title={auth.name}
           alt={`Аватар ${auth.name}`} />
       </button> : (
-        <Text className={style.authLink} As='a' href={urlAuth} >
+        <Text As='a' className={style.authLink} href={urlAuth} >
           <LoginIcon className={style.svg}/>
         </Text>
         )}

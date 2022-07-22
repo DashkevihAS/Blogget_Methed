@@ -32,6 +32,5 @@ export const useAuth = () => {
   }, [token]);
 
   const clearAuth = () => setAuth({});
-
   return [auth, clearAuth];
 };

@@ -8,17 +8,20 @@ import Thumbnail from './Thumbnail';
 import Content from './Content';
 
 
-export const Post = ({postData}) => {
-  const {title, author, ups, date} = postData;
+export const Post = ({post}) => {
+  const {title, author, ups, thumbnail, created} = post;
+  console.log({post});
   return (
     <li className={style.post}>
-      <Thumbnail src={notphoto} alt={title}/>
+      <Thumbnail
+        src={thumbnail === 'default' ? notphoto : thumbnail}
+        alt={title}/>
 
       <Content author={author} title={title} />
 
       <Rating ups={ups}/>
 
-      <Date date={date}/>
+      <Date date={created}/>
 
       <BtnDelete/>
     </li>
@@ -26,5 +29,5 @@ export const Post = ({postData}) => {
 };
 
 Post.propTypes = {
-  postData: PropTypes.object,
+  post: PropTypes.object,
 };
