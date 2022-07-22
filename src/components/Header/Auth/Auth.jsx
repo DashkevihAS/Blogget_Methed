@@ -1,48 +1,32 @@
-import {useEffect, useState} from 'react';
+import {useState, useContext} from 'react';
 import style from './Auth.module.css';
 import PropTypes from 'prop-types';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {URL_API} from '../../../api/const';
+import {tokenContext} from '../../../context/tokenContext';
+import {authContext} from '../../../context/authContext';
 
-export const Auth = ({token, delToken}) => {
-  const [auth, setAuth] = useState({});
-  const [isLogout, setIsLogout] = useState(false);
+
+export const Auth = () => {
+  const {delToken} = useContext(tokenContext);
+  const [showLogout, setShowLogout] = useState(false);
+  const {auth, clearAuth} = useContext(authContext);
+
+  const toggleShowLogout = () => {
+    setShowLogout(!showLogout);
+  };
 
   const logOut = () => {
     delToken();
-    setAuth({});
-    setIsLogout(false);
+    clearAuth();
+    toggleShowLogout();
   };
-
-  useEffect(() => {
-    if (!token) return;
-
-    const req = fetch(`${URL_API}/api/v1/me`, {
-      headers: {
-        Authorization: `bearer ${token}`
-      },
-    });
-
-    req.then(res => {
-      if (res.status === 401) delToken();
-    });
-
-    req.then(response => response.json()
-    ).then(({name, icon_img: iconImg}) => {
-      const img = iconImg.replace(/\?.*$/, '');
-      setAuth({name, img});
-    }).catch((err) => {
-      console.error(err);
-      setAuth({});
-    });
-  }, [token]);
 
   return (
     <div className={style.container}>
       {auth.name ?
-      <button className={style.btn} onClick={() => setIsLogout(!isLogout)}>
+      <button className={style.btn} onClick={toggleShowLogout}>
         <img
           className={style.img}
           src={auth.img}
@@ -53,7 +37,7 @@ export const Auth = ({token, delToken}) => {
           <LoginIcon className={style.svg}/>
         </Text>
         )}
-      {isLogout ?
+      {showLogout ?
       <button onClick={logOut} className={style.logout}> Выйти </button> :
       null}
     </div>
