@@ -15,7 +15,12 @@ export const usePost = () => {
         Authorization: `bearer ${token}`
       },
     })
-      .then(respone => respone.json())
+      .then(response => {
+        if (response.status === 401) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
       .then(data => {
         console.log(data.data.children);
         setPosts(data.data.children);

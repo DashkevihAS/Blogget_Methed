@@ -12,8 +12,8 @@ export const Content = ({author, title}) => (
     </Text>
     <Text
       As='a'
-      size={16}
-      tsize={18}
+      size={12}
+      tsize={14}
       color='orange'
       className={style.linkAuthor}
       href="#author">

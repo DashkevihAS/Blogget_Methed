@@ -1,5 +1,4 @@
 import style from './Post.module.css';
-import notphoto from './img/notphoto.jpeg';
 import PropTypes from 'prop-types';
 import Date from './Date';
 import Rating from './Rating';
@@ -14,7 +13,7 @@ export const Post = ({post}) => {
   return (
     <li className={style.post}>
       <Thumbnail
-        src={thumbnail === 'default' ? notphoto : thumbnail}
+        src={thumbnail}
         alt={title}/>
 
       <Content author={author} title={title} />
