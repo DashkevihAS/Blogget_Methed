@@ -7,6 +7,9 @@ export const Thumbnail = ({src, alt}) => (
 );
 
 Thumbnail.propTypes = {
-  src: PropTypes.string,
+  src: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
   alt: PropTypes.string,
 };
