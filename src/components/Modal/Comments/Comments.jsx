@@ -25,7 +25,7 @@ export const Comments = ({comments}) => {
           >
             {comment.body}
           </Text>
-          <Date date={comment.created} />
+          {comment.created && <Date date={comment.created} />}
         </li>
       )) : <Text As='p'
         className={style.comment}
