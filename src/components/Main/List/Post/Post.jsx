@@ -6,30 +6,34 @@ import BtnDelete from './BtnDelete';
 import Thumbnail from './Thumbnail';
 import Content from './Content';
 import nophoto from './img/notphoto.jpeg';
+// import {useCommentsData} from '../../../../hooks/useCommentsData';
 
 export const Post = ({post}) => {
+  // console.log(useCommentsData());
   const {
     title,
     author,
     ups,
     thumbnail,
-    created,
+    created: date,
+    id,
     thumbnail_height: thumbnailHeight,
     thumbnail_width: thumbnailWidth
   } = post;
-  console.log({post});
 
   return (
     <li className={style.post}>
       <Thumbnail
-        src={(thumbnailHeight && thumbnailWidth) ? thumbnail : nophoto}
+        src={(thumbnailHeight && thumbnailWidth && (thumbnail.length > 10)) ?
+        thumbnail :
+        nophoto}
         alt={title}/>
 
-      <Content author={author} title={title} />
+      <Content author={author} title={title} id={id} />
 
       <Rating ups={ups}/>
 
-      <Date date={created}/>
+      <Date date={date}/>
 
       <BtnDelete/>
     </li>

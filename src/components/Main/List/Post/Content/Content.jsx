@@ -1,29 +1,50 @@
-import React from 'react';
+import {useState} from 'react';
 import style from './Content.module.css';
 import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
+import Modal from '../../../../Modal';
 
-export const Content = ({author, title}) => (
-  <div className={style.content} >
-    <Text As='h2' className={style.title} >
-      <Text As='a' size={18} tsize={24} className={style.linkPost} href="#post">
-        {title}
+export const Content = ({author, title, id}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <div className={style.content} >
+      <Text As='h2' className={style.title} >
+        <Text As='a'
+          size={14}
+          tsize={22}
+          className={style.linkPost}
+          href="#post"
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
+        >
+          {title}
+        </Text>
       </Text>
-    </Text>
-    <Text
-      As='a'
-      size={12}
-      tsize={14}
-      color='orange'
-      className={style.linkAuthor}
-      href="#author">
-      {author}
-    </Text>
-  </div>
-);
-
+      <Text
+        As='a'
+        size={12}
+        tsize={14}
+        color='orange'
+        className={style.linkAuthor}
+        href="#author"
+      >
+        {author}
+      </Text>
+      {isModalOpen && <Modal
+        id={id}
+        closeModal={() => {
+          setIsModalOpen(false);
+        }}
+      />}
+    </div>
+  );
+};
 
 Content.propTypes = {
   author: PropTypes.string,
   title: PropTypes.string,
+  id: PropTypes.string,
 };
+

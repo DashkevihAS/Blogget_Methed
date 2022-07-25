@@ -12,6 +12,7 @@ export const Text = (prop) => {
     className,
     children,
     href,
+    onClick,
     center,
     bold,
     medium,
@@ -28,7 +29,7 @@ export const Text = (prop) => {
     {[style[`dst${dsize}`]]: dsize},
   );
   return (
-    <As className={classes} href={href} >{children}</As>
+    <As className={classes} href={href} onClick={onClick} >{children}</As>
   );
 };
 
@@ -40,6 +41,7 @@ Text.propTypes = {
   dsize: PropTypes.number,
   className: PropTypes.string,
   href: PropTypes.string,
+  onClick: PropTypes.func,
   center: PropTypes.bool,
   bold: PropTypes.bool,
   medium: PropTypes.bool,
