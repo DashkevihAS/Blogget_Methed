@@ -7,6 +7,7 @@ import {useEffect, useRef} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {Comments} from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment';
+import Spinner from './Spinner/Spinner';
 
 export const Modal = ({id, closeModal}) => {
   const overlayRef = useRef(null);
@@ -67,6 +68,7 @@ export const Modal = ({id, closeModal}) => {
         </div> :
         <div className={style.modal}>
           <h2 className={style.load} >Загрузка ... </h2>
+          <Spinner/>
         </div>}
     </div>,
     document.getElementById('modal-root')

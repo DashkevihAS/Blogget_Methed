@@ -3,6 +3,7 @@ import style from './Comments.module.css';
 import PropTypes from 'prop-types';
 import Date from '../../Main/List/Post/Date';
 import {Text} from '../../../UI/Text';
+import Markdown from 'markdown-to-jsx';
 
 
 export const Comments = ({comments}) => {
@@ -10,7 +11,11 @@ export const Comments = ({comments}) => {
   return (
     <ul className={style.list}>
       {comments.length > 0 ? comments.map(comment => {
-        if (comment.created && comment.id && comment.author && comment.body) {
+        if (comment.created &&
+        comment.id &&
+        comment.author && comment.author !== '[deleted]' &&
+        comment.body && comment.body !== '[removed]'
+        ) {
           return (
             <li key={comment.id} className={style.item}>
               <Text As='h3'
@@ -20,12 +25,23 @@ export const Comments = ({comments}) => {
               >
                 {comment.author}
               </Text>
-              <Text As="p"
+              <Text As="div"
                 className={style.comment}
                 size={14}
                 tsize={18}
               >
-                {comment.body}
+                <Markdown options={{
+                  // чтобы ссылке в тексте открывались на новой вкладке
+                  overrides: {
+                    a: {
+                      props: {
+                        target: '_blank',
+                      },
+                    },
+                  },
+                }}>
+                  {comment.body}
+                </Markdown>
               </Text>
               <Date date={comment.created} />
             </li>
