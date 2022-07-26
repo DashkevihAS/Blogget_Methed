@@ -2,8 +2,13 @@ import {useContext, useRef, useState, useEffect} from 'react';
 import style from './FormComment.module.css';
 import {Text} from '../../../UI/Text';
 import {authContext} from '../../../context/authContext';
+import {useSelector, useDispatch} from 'react-redux';
+import {updateComment} from '../../../store/index';
 
 export const FormComment = () => {
+  const value = useSelector(state => state.comment);
+  const dispatch = useDispatch();
+
   const {auth} = useContext(authContext);
   const textareaRef = useRef(null);
 
@@ -11,12 +16,15 @@ export const FormComment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(textareaRef.current.value);
-    textareaRef.current.value = '';
+    console.log(value);
   };
 
   const handlerClick = () => {
     setIsOpen(true);
+  };
+
+  const handlerChange = (e) => {
+    dispatch(updateComment(e.target.value));
   };
 
   useEffect(() => {
@@ -27,12 +35,15 @@ export const FormComment = () => {
     <>
       {isOpen ?
       <form onSubmit={handleSubmit} className={style.form} >
-        <Text As='h3' size={14} tsize={18}>{auth.name}</Text>
+        <Text As='h3' size={14} tsize={18}>
+          {auth.name}
+        </Text>
         <textarea
-          ref={textareaRef}
           className={style.textarea}
-        >
-        </textarea>
+          value={value}
+          ref={textareaRef}
+          onChange={handlerChange}
+        />
         <button className={style.btn} >Отправить</button>
       </form> :
       <button

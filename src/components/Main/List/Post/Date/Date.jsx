@@ -4,18 +4,14 @@ import formatDate from '../../../../../utils/formatDate.js';
 import PropTypes from 'prop-types';
 
 
-export const Date = ({date}) => {
-  console.log(date);
-  return (
-    <time
-      className={style.date}
-      dateTime={date}
-    >
-      {formatDate(date)}
-    </time>
-  );
-};
-
+export const Date = ({date}) => (
+  <time
+    className={style.date}
+    dateTime={date}
+  >
+    {formatDate(date)}
+  </time>
+);
 
 Date.propTypes = {
   date: PropTypes.number,
