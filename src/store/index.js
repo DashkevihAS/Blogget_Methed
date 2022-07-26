@@ -20,9 +20,9 @@ export const updateToken = token => ({
   token,
 });
 
-export const deleteToken = token => ({
+export const deleteToken = () => ({
   type: DELETE_TOKEN,
-  token,
+  token: '',
 });
 
 const rootReducer = (state = initialState, action) => {
