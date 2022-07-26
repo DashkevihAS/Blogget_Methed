@@ -30,7 +30,7 @@ export const Comments = ({comments}) => {
                 size={14}
                 tsize={18}
               >
-                <Markdown options={{
+                <Markdown className={style.comment} options={{
                   // чтобы ссылке в тексте открывались на новой вкладке
                   overrides: {
                     a: {

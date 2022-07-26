@@ -13,6 +13,13 @@
 .comment {
   white-space: pre-line
 }
+.comment h1, h2{
+  font-size: 18px;
+  line-height: 22px;
+  white-space: pre-line;
+  font-weight: 400;
+
+}
 
 @media (min-width: 768px) {
   .list {
