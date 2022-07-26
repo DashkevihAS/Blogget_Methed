@@ -19,7 +19,7 @@ export const Auth = () => {
   };
 
   const logOut = () => {
-    dispatch(deleteToken(localStorage.getItem('bearer')));
+    dispatch(deleteToken());
     clearAuth();
     toggleShowLogout();
   };
