@@ -23,12 +23,15 @@
 }
 
 .load {
-  margin: 200px;
+  margin-top: 50px;
   font-size: 18px;
   text-align: center;
 }
-
-
+.spinner {
+  margin: 200px auto 0 ;
+  width: 100px;
+  height: 100px;
+}
 
 .content p {
   margin-bottom: 20px;
