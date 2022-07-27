@@ -3,10 +3,12 @@ import style from './Content.module.css';
 import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
 import Modal from '../../../../Modal';
+import {useDispatch} from 'react-redux';
+import {commentsClose} from '../../../../../store/comments/commentsAction';
 
 export const Content = ({author, title, id}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const dispatch = useDispatch();
   return (
     <div className={style.content} >
       <Text As='h2' className={style.title} >
@@ -36,6 +38,7 @@ export const Content = ({author, title, id}) => {
         id={id}
         closeModal={() => {
           setIsModalOpen(false);
+          dispatch(commentsClose());
         }}
       />}
     </div>
