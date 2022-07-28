@@ -23,7 +23,7 @@ export const postRequestAsync = () => (dispatch, getState) => {
   const token = getState().token.token;
 
   if (!token) return;
-
+  dispatch(postRequest());
   axios(`${URL_API}/best`, {
     headers: {
       Authorization: `bearer ${token}`

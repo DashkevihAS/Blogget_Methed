@@ -1,4 +1,5 @@
 // import axios from 'axios';
+import axios from 'axios';
 import {URL_API} from '../../api/const';
 
 export const COMMENTS_REQUEST = 'COMMENTS_REQUEST';
@@ -28,33 +29,30 @@ export const commentsRequestAsync = (id) => (dispatch, getState) => {
   const token = getState().token.token;
 
   if (!token) return;
-  console.log(id);
-  fetch(`${URL_API}/comments/${id}`, {
+  dispatch(commentsRequest());
+  axios(`${URL_API}/comments/${id}`, {
     headers: {
       Authorization: `bearer ${token}`,
     },
   })
-    .then((response) => {
-      if (response.status === 401) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
     .then(
-      ([
-        {
-          data: {
-            children: [{data: post}],
+      ({data:
+        [
+          {
+            data: {
+              children: [{data: post}],
+            },
           },
-        },
-        {
-          data: {
-            children,
+          {
+            data: {
+              children,
+            },
           },
-        },
-      ]) => {
+        ]
+      }) => {
         const comments = children.map(item => item.data);
-        dispatch(commentsRequestSuccess([post, comments]));
+        const data = [post, comments];
+        dispatch(commentsRequestSuccess(data));
       },
     )
     .catch((err) => {
