@@ -13,7 +13,6 @@ export const useCommentsData = (id) => {
 
   useEffect(() => {
     dispatch(commentsRequestAsync(id));
-    console.log(id);
   }, [token]);
   return [commentsData, status, error];
 };

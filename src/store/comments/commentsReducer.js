@@ -2,7 +2,6 @@ import {
   COMMENTS_REQUEST,
   COMMENTS_REQUEST_ERROR,
   COMMENTS_REQUEST_SUCCESS,
-  COMMENTS_CLOSE
 } from './commentsAction';
 
 
@@ -33,13 +32,6 @@ export const commentsReducer = (state = initialState, action) => {
         ...state,
         status: 'error',
         error: action.error,
-      };
-    case COMMENTS_CLOSE:
-      return {
-        ...state,
-        status: '',
-        error: '',
-        data: {},
       };
     default:
       return state;

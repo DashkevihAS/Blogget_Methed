@@ -1,18 +1,23 @@
 import Header from './components/Header';
 import Main from './components/Main';
 import {useDispatch} from 'react-redux';
-import {updateToken} from './store/tokenReducer';
+import {updateToken} from './store/token/tokenAction';
 import {getToken} from './api/token';
+import {Route, Routes} from 'react-router';
 
 const App = () => {
   const dispatch = useDispatch();
   dispatch(updateToken(getToken()));
 
   return (
-    <>
-      <Header />
-      <Main />
-    </>
+    <Routes>
+      <Route path='*' element={
+        <>
+          <Header />
+          <Main />
+        </>
+      }/>
+    </Routes>
   );
 };
 

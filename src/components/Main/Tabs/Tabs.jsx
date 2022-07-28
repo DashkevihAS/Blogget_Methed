@@ -10,18 +10,20 @@ import {ReactComponent as HomeIcon} from './img/home.svg';
 import {ReactComponent as TopIcon} from './img/top.svg';
 import {ReactComponent as BestHot} from './img/best.svg';
 import {ReactComponent as HotIcon} from './img/hot.svg';
+import {useNavigate} from 'react-router';
 
 const LIST = [
-  {value: 'Главная', Icon: HomeIcon},
-  {value: 'Топ', Icon: TopIcon},
-  {value: 'Лучшие', Icon: BestHot},
-  {value: 'Горячие', Icon: HotIcon}
+  {value: 'Главная', Icon: HomeIcon, link: 'rising'},
+  {value: 'Топ', Icon: TopIcon, link: 'top'},
+  {value: 'Лучшие', Icon: BestHot, link: 'best'},
+  {value: 'Горячие', Icon: HotIcon, link: 'hot'}
 ].map(assignId);
 
 export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setisDropdown] = useState(true);
-  const [tabValue, setTabValue] = useState('Меню');
+  const [itemMenu, setItemMenu] = useState('Меню');
+  const navigate = useNavigate();
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -47,7 +49,7 @@ export const Tabs = () => {
           <button
             className={style.btn}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-            <Text size={18} tsize={22} bold>{tabValue}</Text>
+            <Text size={18} tsize={22} bold>{itemMenu}</Text>
             <ArrowIcon width={15} height={15} />
           </button>
         </div>
@@ -55,11 +57,14 @@ export const Tabs = () => {
 
       {(isDropdownOpen || !isDropdown) && (
         <ul className={style.list} onClick={() => setIsDropdownOpen(false)}>
-          {LIST.map(({value, id, Icon}) => (
+          {LIST.map(({value, id, Icon, link}) => (
             <li className={style.item} key ={id} >
               <button
                 className={style.btn}
-                onClick={() => setTabValue(value)}>
+                onClick={() => {
+                  setItemMenu(value);
+                  navigate(`/category/${link}`);
+                }}>
                 <Text size={18} tsize={22} bold>{value}</Text>
                 {Icon && <Icon width={30} height={30}/>}
               </button>

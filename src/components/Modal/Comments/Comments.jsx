@@ -8,7 +8,7 @@ import Markdown from 'markdown-to-jsx';
 
 export const Comments = ({comments}) => (
   <ul className={style.list}>
-    {comments.length > 0 ? comments.map(comment => {
+    {comments.length ? comments.map(comment => {
       if (comment.created &&
       comment.id &&
       comment.author && comment.author !== '[deleted]' &&

@@ -5,7 +5,7 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
 import {useDispatch} from 'react-redux';
-import {deleteToken} from '../../../store/tokenReducer';
+import {deleteToken} from '../../../store/token/tokenAction';
 import {useAuth} from '../../../hooks/useAuth';
 import Spinner from '../../../UI/Spinner/Spinner';
 
