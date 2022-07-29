@@ -50,7 +50,7 @@ export const commentsRequestAsync = (id) => (dispatch, getState) => {
       },
     )
     .catch((err) => {
-      console.error(err);
-      dispatch(commentsRequestError(err.message));
+      // console.error(err);
+      dispatch(commentsRequestError(err));
     });
 };

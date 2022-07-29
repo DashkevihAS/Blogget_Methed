@@ -1,9 +1,9 @@
-import Header from './components/Header';
-import Main from './components/Main';
 import {useDispatch} from 'react-redux';
 import {updateToken} from './store/token/tokenAction';
 import {getToken} from './api/token';
 import {Route, Routes} from 'react-router';
+import Header from './components/Header';
+import Main from './components/Main';
 
 const App = () => {
   const dispatch = useDispatch();

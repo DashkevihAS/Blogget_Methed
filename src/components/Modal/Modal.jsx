@@ -9,6 +9,7 @@ import {Comments} from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment';
 import Spinner from '../../UI/Spinner/Spinner';
 import {useParams, useNavigate} from 'react-router-dom';
+// import {Error} from '../Main/Error/Error';
 
 
 export const Modal = () => {
@@ -16,6 +17,9 @@ export const Modal = () => {
   const navigate = useNavigate();
   const overlayRef = useRef(null);
   const [data, status, error] = useCommentsData(id);
+
+  console.log(error);
+
   const handleClick = e => {
     const target = e.target;
     if (target === overlayRef.current) {
@@ -46,10 +50,8 @@ export const Modal = () => {
         <h2 className={style.load} >Загрузка ... </h2>
       </div>
       }
-      {status === 'error' &&
-      <div className={style.modal}>
-        <h2 className={style.load} >{error}</h2>
-      </div>
+      {status === 'error' && error.response.status === 404 &&
+        navigate('*')
       }
       {status === 'loaded' &&
       Array.isArray(data) ?
