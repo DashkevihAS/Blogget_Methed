@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import style from './Auth.module.css';
 import PropTypes from 'prop-types';
 import {ReactComponent as LoginIcon} from './img/login.svg';
@@ -8,17 +8,19 @@ import {useDispatch} from 'react-redux';
 import {deleteToken} from '../../../store/token/tokenAction';
 import {useAuth} from '../../../hooks/useAuth';
 import Spinner from '../../../UI/Spinner/Spinner';
-import {useNavigate} from 'react-router';
 import {commentsClearStatus} from '../../../store/comments/commentsAction';
+import {useParams} from 'react-router';
 
 export const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
   const [auth, loading, clearAuth] = useAuth();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const path = useParams();
   const toggleShowLogout = () => {
     setShowLogout(!showLogout);
   };
+
+  console.log(path);
 
   const logOut = () => {
     dispatch(deleteToken());
@@ -26,10 +28,6 @@ export const Auth = () => {
     clearAuth();
     toggleShowLogout();
   };
-
-  useEffect(() => {
-    navigate('/');
-  }, []);
 
   return (
     <div className={style.container}>
