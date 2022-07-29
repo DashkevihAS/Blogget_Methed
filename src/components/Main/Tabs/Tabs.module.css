@@ -68,3 +68,26 @@
     border: none;
   }
 }
+
+
+.modalAuth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: tomato;
+  padding: 20px 15px;
+  border-radius: 16px;
+  width: 40%;
+}
+.needAuth {
+  font-size: 16px;
+  text-align: center;
+  color: var(--white);;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+}

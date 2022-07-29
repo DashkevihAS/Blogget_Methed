@@ -9,16 +9,12 @@ import {Comments} from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment';
 import Spinner from '../../UI/Spinner/Spinner';
 import {useParams, useNavigate} from 'react-router-dom';
-// import {Error} from '../Main/Error/Error';
-
 
 export const Modal = () => {
   const {id, page} = useParams();
   const navigate = useNavigate();
   const overlayRef = useRef(null);
   const [data, status, error] = useCommentsData(id);
-
-  console.log(error);
 
   const handleClick = e => {
     const target = e.target;
@@ -84,6 +80,10 @@ export const Modal = () => {
           </button>
         </div> : null
       }
+      {status === '' &&
+      <div className={style.modalAuth}>
+        <p className={style.needAuth} >Необходимо выполнить авторизацию! </p>
+      </div>}
     </div>,
     document.getElementById('modal-root')
   );
