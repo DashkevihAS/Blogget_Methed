@@ -14,7 +14,7 @@ export const Modal = () => {
   const {id, page} = useParams();
   const navigate = useNavigate();
   const overlayRef = useRef(null);
-  const [data, status, error] = useCommentsData(id);
+  const [post, comments, status] = useCommentsData(id);
 
   const handleClick = e => {
     const target = e.target;
@@ -37,7 +37,6 @@ export const Modal = () => {
       document.addEventListener('keydown', handleKeydown);
     };
   }, []);
-
   return ReactDom.createPortal(
     <div className={style.overlay} ref={overlayRef}>
       {status === 'loading' &&
@@ -46,13 +45,12 @@ export const Modal = () => {
         <h2 className={style.load} >Загрузка ... </h2>
       </div>
       }
-      {status === 'error' && error.response.status === 404 &&
+      {status === 'error' &&
         navigate('*')
       }
-      {status === 'loaded' &&
-      Array.isArray(data) ?
+      {status === 'loaded' && post &&
         <div className={style.modal}>
-          <h2 className={style.title} >{data[0].title}</h2>
+          <h2 className={style.title} >{post.title}</h2>
 
           <div className={style.content}>
             <Markdown options={{
@@ -65,21 +63,20 @@ export const Modal = () => {
                 },
               },
             }}>
-              {data[0].selftext}
+              {post.selftext}
             </Markdown>
           </div>
 
-          <p className={style.author}>{data[0].author}</p>
+          <p className={style.author}>{post.author}</p>
           <FormComment/>
-          <Comments comments={data[1]}/>
+          <Comments comments={comments}/>
           <button
             className={style.close}
             onClick={() => navigate(`/category/${page}`)}
           >
             <CloseIcon/>
           </button>
-        </div> : null
-      }
+        </div>}
       {status === '' &&
       <div className={style.modalAuth}>
         <p className={style.needAuth} >Необходимо выполнить авторизацию! </p>

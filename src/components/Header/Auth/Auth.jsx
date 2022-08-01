@@ -8,23 +8,20 @@ import {useDispatch} from 'react-redux';
 import {deleteToken} from '../../../store/token/tokenAction';
 import {useAuth} from '../../../hooks/useAuth';
 import Spinner from '../../../UI/Spinner/Spinner';
-import {commentsClearStatus} from '../../../store/comments/commentsAction';
-import {useParams} from 'react-router';
+import {commentsSlice} from '../../../store/comments/commentsSlice';
+
 
 export const Auth = () => {
   const [showLogout, setShowLogout] = useState(false);
   const [auth, loading, clearAuth] = useAuth();
   const dispatch = useDispatch();
-  const path = useParams();
   const toggleShowLogout = () => {
     setShowLogout(!showLogout);
   };
 
-  console.log(path);
-
   const logOut = () => {
     dispatch(deleteToken());
-    dispatch(commentsClearStatus());
+    dispatch(commentsSlice.actions.commentsClearStatus());
     clearAuth();
     toggleShowLogout();
   };

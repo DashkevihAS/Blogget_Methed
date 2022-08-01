@@ -7,7 +7,6 @@ export const POST_REQUEST_SUCCESS_AFTER = 'POST_REQUEST_SUCCESS_AFTER';
 export const POST_REQUEST_ERROR = 'POST_REQUEST_ERROR';
 export const CHANGE_PAGE = 'CHANGE_PAGE';
 
-
 export const postRequest = () => ({
   type: POST_REQUEST,
 });
