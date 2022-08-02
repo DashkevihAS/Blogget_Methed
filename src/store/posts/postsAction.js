@@ -5,14 +5,12 @@ import {URL_API} from '../../api/const';
 export const postRequestAsync = createAsyncThunk(
   'posts/fetch',
   (newPage, {getState}) => {
-    const page = getState().posts.page;
+    const page = newPage || getState().posts.page;
     const token = getState().token.token;
     const after = getState().posts.after;
-    const loading = getState().posts.loading;
     const isLast = getState().posts.isLast;
-    const children = getState().posts.posts;
 
-    if (!token || !loading || isLast) return {children};
+    if (!token || isLast) return;
 
     return axios(
       `${URL_API}/${page}?limit=10&${after ? `after=${after}` : ''}`, {
@@ -21,6 +19,6 @@ export const postRequestAsync = createAsyncThunk(
         },
       })
       .then(({data}) => (data.data))
-      .catch((error) => ({error: error.toString()}));
+      .catch((err) => ({error: err}));
   },
 );

@@ -28,14 +28,16 @@ export const postsSlice = createSlice({
     },
     [postRequestAsync.fulfilled.type]: (state, action) => {
       if (state.after && (action.payload.after !== state.after)) {
-        state.posts = [...state.posts, ...action.payload.children];
+        action.payload ?
+        state.posts = [...state.posts, ...action.payload.children] :
+        state.posts;
       } else {
-        state.posts = action.payload.children;
+        action.payload ? state.posts = action.payload.children : state.posts;
       }
       state.loading = false;
       state.error = '';
-      state.after = action.payload.after;
-      state.isLast = !action.payload.after;
+      action.payload ? state.after = action.payload.after : state.after;
+      action.payload ? state.isLast = !action.payload.after : state.isLast;
     },
     [postRequestAsync.rejected.type]: (state, action) => {
       state.status = 'error';
