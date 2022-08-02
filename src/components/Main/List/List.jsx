@@ -2,6 +2,7 @@ import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Outlet, useParams} from 'react-router';
 import {postRequestAsync} from '../../../store/posts/postsAction';
+import {postsSlice} from '../../../store/posts/postsSlice';
 import Spinner from '../../../UI/Spinner/Spinner';
 import style from './List.module.css';
 import Post from './Post';
@@ -13,6 +14,7 @@ export const List = () => {
   const {page} = useParams();
 
   useEffect(() => {
+    dispatch(postsSlice.actions.changePage(page));
     dispatch(postRequestAsync(page));
   }, [page]);
 
