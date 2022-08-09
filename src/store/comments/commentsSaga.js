@@ -41,10 +41,3 @@ function* fetchComment() {
 export function* watchComments() {
   yield takeEvery(commentsRequest.type, fetchComment);
 }
-
-export const fetchComments = (id) => ({
-  type: 'FETCH_COMMENTS',
-  id,
-});
-
-

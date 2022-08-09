@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {postRequestAsync} from '../store/posts/postsAction';
+import {postRequest} from '../store/posts/postsSlice';
 
 export const usePost = () => {
   const posts = useSelector(state => state.posts.data);
@@ -9,7 +9,7 @@ export const usePost = () => {
 
 
   useEffect(() => {
-    dispatch(postRequestAsync());
+    dispatch(postRequest());
   }, [token]);
   return [posts];
 };

@@ -1,8 +1,7 @@
 import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Outlet, useParams} from 'react-router';
-import {postRequestAsync} from '../../../store/posts/postsAction';
-import {postsSlice} from '../../../store/posts/postsSlice';
+import {postRequest, postsSlice} from '../../../store/posts/postsSlice';
 import Spinner from '../../../UI/Spinner/Spinner';
 import style from './List.module.css';
 import Post from './Post';
@@ -15,13 +14,13 @@ export const List = () => {
 
   useEffect(() => {
     dispatch(postsSlice.actions.changePage(page));
-    dispatch(postRequestAsync(page));
+    dispatch(postRequest());
   }, [page]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        dispatch(postRequestAsync());
+        dispatch(postRequest());
       }
     }, {
       rootMargin: '100px',
@@ -39,7 +38,7 @@ export const List = () => {
     <>
       <ul className={style.list}>
         {posts ? posts.map((post) => (
-          <Post key={post.data.id} post={post.data} />
+          <Post key={post.id} post={post} />
         )) : <div className={style.preload}><Spinner/></div>}
         <li className={style.end} ref={endList}/>
       </ul>
