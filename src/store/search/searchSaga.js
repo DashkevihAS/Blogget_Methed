@@ -7,15 +7,20 @@ import {
   SEARCH_REQUEST
 } from './searchAction';
 
-function* fetchSearch(search) {
+function* fetchSearch({search}) {
   const token = yield select(state => state.token.token);
+  const aft = yield select(state => state.search.after);
   try {
-    const request = yield axios(`${URL_API}/search?q=${search}`, {
+    // eslint-disable-next-line max-len
+    const request = yield axios(`${URL_API}/search?q=${search}&limit=10&${aft ? `after=${aft}` : ''}`, {
       headers: {
         Authorization: `bearer ${token}`
       },
     });
-    yield put(searchRequestSuccess(request.data.data));
+    const after = request.data.data.after;
+    const children = request.data.data.children.map(item => item.data);
+    yield put(searchRequestSuccess({children, after}));
+    console.log({children, after});
   } catch (e) {
     yield put(searchRequestError(e));
   }

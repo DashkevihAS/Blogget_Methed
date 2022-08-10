@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-// import {postRequestAsync} from './postsAction';
 
 const initialState = {
   posts: [],

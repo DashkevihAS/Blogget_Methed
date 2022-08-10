@@ -1,4 +1,4 @@
-import {select, takeEvery, put} from 'redux-saga/effects';
+import {select, put, takeLatest} from 'redux-saga/effects';
 import {URL_API} from '../../api/const';
 import axios from 'axios';
 import {
@@ -22,12 +22,9 @@ function* fetchPosts() {
           Authorization: `bearer ${token}`
         },
       });
-    const data = request.data.data;
     const after = request.data.data.after;
     const children = request.data.data.children.map(item => item.data);
 
-    console.log({children, after});
-    console.log(data);
     yield put(postRequestSuccess({children, after}));
   } catch (e) {
     yield put(postRequestError(e.message));
@@ -36,5 +33,5 @@ function* fetchPosts() {
 
 
 export function* watchPosts() {
-  yield takeEvery(postRequest.type, fetchPosts);
+  yield takeLatest(postRequest.type, fetchPosts);
 }

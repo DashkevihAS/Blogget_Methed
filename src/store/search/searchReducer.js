@@ -20,15 +20,17 @@ export const searchReducer = (state = initialState, action) => {
         ...state,
         loading: true,
         error: '',
+        posts: [],
+        after: '',
       };
     case SEARCH_REQUEST_SUCCESS:
       return {
         ...state,
         loading: false,
-        posts: action.posts,
         error: '',
         after: action.after,
         isLast: !action.after,
+        posts: action.children,
       };
     case SEARCH_REQUEST_ERROR:
       return {
