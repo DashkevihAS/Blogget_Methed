@@ -12,16 +12,20 @@ function* fetchPosts() {
   const page = yield select(state => state.posts.page);
   const aft = yield select(state => state.posts.after);
   const isLast = yield select(state => state.posts.isLast);
+  const search = yield select(state => state.posts.search);
 
 
   if (!token || isLast) return;
   try {
-    const request = yield axios(
-      `${URL_API}/${page}?limit=10&${aft ? `after=${aft}` : ''}`, {
-        headers: {
-          Authorization: `bearer ${token}`
-        },
-      });
+    console.log(search);
+    const request = yield axios(!search ?
+      `${URL_API}/${page}?limit=10&${aft ? `after=${aft}` : ''}` :
+      `${URL_API}/search?q=${search}&limit=10&${aft ? `after=${aft}` : ''}`,
+    {
+      headers: {
+        Authorization: `bearer ${token}`
+      },
+    });
     const after = request.data.data.after;
     const children = request.data.data.children.map(item => item.data);
 
