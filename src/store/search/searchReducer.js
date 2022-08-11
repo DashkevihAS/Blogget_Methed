@@ -21,7 +21,6 @@ export const searchReducer = (state = initialState, action) => {
         loading: true,
         error: '',
         posts: [],
-        after: '',
       };
     case SEARCH_REQUEST_SUCCESS:
       return {

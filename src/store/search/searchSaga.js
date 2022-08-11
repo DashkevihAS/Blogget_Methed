@@ -3,13 +3,15 @@ import {URL_API} from '../../api/const';
 import axios from 'axios';
 import {
   searchRequestError,
-  searchRequestSuccess,
+  // searchRequestSuccess,
   SEARCH_REQUEST
 } from './searchAction';
+import {postsSearch} from '../posts/postsSlice';
 
-function* fetchSearch({search}) {
+function* fetchSearch() {
   const token = yield select(state => state.token.token);
-  const aft = yield select(state => state.search.after);
+  const aft = yield select(state => state.posts.after);
+  const search = yield select(state => state.posts.search);
   try {
     // eslint-disable-next-line max-len
     const request = yield axios(`${URL_API}/search?q=${search}&limit=10&${aft ? `after=${aft}` : ''}`, {
@@ -19,7 +21,7 @@ function* fetchSearch({search}) {
     });
     const after = request.data.data.after;
     const children = request.data.data.children.map(item => item.data);
-    yield put(searchRequestSuccess({children, after}));
+    yield put(postsSearch({children, after}));
     console.log({children, after});
   } catch (e) {
     yield put(searchRequestError(e));

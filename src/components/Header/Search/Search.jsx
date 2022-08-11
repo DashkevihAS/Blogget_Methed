@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {setSearch} from '../../../store/posts/postsSlice';
 import {searchRequest} from '../../../store/search/searchAction';
 import style from './Search.module.css';
 
 
 export const Search = props => {
   const dispatch = useDispatch();
-  const [search, setSearch] = useState('');
+  const search = useSelector(state => state.posts.search);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchRequest(search));
+    dispatch(searchRequest());
   };
   return (
     <form className={style.form} onSubmit={handlerSubmit}>
       <input
         className={style.search}
         type="search"
-        onChange={e => setSearch(e.target.value)}
+        onChange={e => dispatch(setSearch(e.target.value))}
         value={search}
       />
       <button className={style.button} type="submit">
