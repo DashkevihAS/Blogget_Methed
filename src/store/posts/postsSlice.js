@@ -8,7 +8,6 @@ const initialState = {
   isLast: false,
   page: '',
   search: '',
-  isSearch: false,
 };
 
 
@@ -20,8 +19,7 @@ export const postsSlice = createSlice({
       state.page = action.payload;
       state.isLast = false;
       state.after = '';
-      state.search = '';
-      state.isSearch = false;
+      // state.search = '';
     },
     postRequest: (state) => {
       state.loading = true;
@@ -60,7 +58,10 @@ export const postsSlice = createSlice({
     setSearch: (state, action) => {
       state.after = '';
       state.search = action.payload;
-      state.isSearch = true;
+      state.page = '';
+    },
+    clearSearch: (state) => {
+      state.search = '';
     }
   },
 });
@@ -73,5 +74,6 @@ export const {
   postRequestSuccess,
   postRequestError,
   postsSearch,
-  setSearch
+  setSearch,
+  clearSearch
 } = postsSlice.actions;

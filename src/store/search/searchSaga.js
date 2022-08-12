@@ -3,7 +3,6 @@ import {URL_API} from '../../api/const';
 import axios from 'axios';
 import {
   searchRequestError,
-  // searchRequestSuccess,
   SEARCH_REQUEST
 } from './searchAction';
 import {postsSearch} from '../posts/postsSlice';
@@ -22,7 +21,6 @@ function* fetchSearch() {
     const after = request.data.data.after;
     const children = request.data.data.children.map(item => item.data);
     yield put(postsSearch({children, after}));
-    console.log({children, after});
   } catch (e) {
     yield put(searchRequestError(e));
   }

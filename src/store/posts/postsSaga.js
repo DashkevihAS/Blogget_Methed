@@ -5,6 +5,7 @@ import {
   postRequest,
   postRequestSuccess,
   postRequestError,
+  clearSearch,
 } from './postsSlice';
 
 function* fetchPosts() {
@@ -14,11 +15,9 @@ function* fetchPosts() {
   const isLast = yield select(state => state.posts.isLast);
   const search = yield select(state => state.posts.search);
 
-
   if (!token || isLast) return;
   try {
-    console.log(search);
-    const request = yield axios(!search ?
+    const request = yield axios(page ?
       `${URL_API}/${page}?limit=10&${aft ? `after=${aft}` : ''}` :
       `${URL_API}/search?q=${search}&limit=10&${aft ? `after=${aft}` : ''}`,
     {
@@ -30,6 +29,7 @@ function* fetchPosts() {
     const children = request.data.data.children.map(item => item.data);
 
     yield put(postRequestSuccess({children, after}));
+    yield page && put(clearSearch());
   } catch (e) {
     yield put(postRequestError(e.message));
   }

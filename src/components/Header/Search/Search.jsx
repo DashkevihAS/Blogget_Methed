@@ -1,4 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 import {setSearch} from '../../../store/posts/postsSlice';
 import {searchRequest} from '../../../store/search/searchAction';
 import style from './Search.module.css';
@@ -7,9 +8,11 @@ import style from './Search.module.css';
 export const Search = props => {
   const dispatch = useDispatch();
   const search = useSelector(state => state.posts.search);
+  const navigate = useNavigate();
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    navigate(`/search`);
     dispatch(searchRequest());
   };
   return (
